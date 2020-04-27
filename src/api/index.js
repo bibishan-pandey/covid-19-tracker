@@ -12,3 +12,18 @@ export const fetchData = async () => {
         console.log('Could not fetch the API data!!!');
     }
 }
+
+export const fetchDailyData = async () => {
+    try {
+        const { data } = await axios.get(`${url}/daily`);
+
+        return data.map((dailyData) => ({
+            confirmed: dailyData.confirmed.total,
+            // recovered: dailyData.recovered.total,
+            deaths: dailyData.deaths.total,
+            reportDate: dailyData.reportDate
+        }));
+    } catch (e) {
+        console.log('Could not fetch the API data!!!');
+    }
+}
